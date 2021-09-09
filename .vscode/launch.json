@@ -9,6 +9,7 @@
             "type": "java",
             "name": "Launch Current File",
             "request": "launch",
+            "vmArgs": "-ea",
             "mainClass": "${file}"
         },
         {
