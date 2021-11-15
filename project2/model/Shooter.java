@@ -54,6 +54,10 @@ public class Shooter extends GameElement {
         return weapons;
     }
 
+    public ArrayList<GameElement> getComponents() {
+        return components;
+    }
+
     @Override
     public void render(Graphics2D g2) {
         for (var c: components) c.render(g2);

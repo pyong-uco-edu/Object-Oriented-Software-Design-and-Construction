@@ -150,5 +150,21 @@ public class EnemyComposite extends GameElement {
         }
         shooter.getWeapons().removeAll(removeBullets);
         bombs.removeAll(removeBombs);
+
+        removeBombs.clear();
+        var removeBody = new ArrayList<GameElement>();
+        for (var b: bombs) {
+            for (var body: shooter.getComponents()) {
+                if (b.collideWith(body)) {
+                    removeBombs.add(b);
+                    removeBody.add(body);
+                }
+            }
+        }
+        shooter.getComponents().removeAll(removeBody);
+        bombs.removeAll(removeBombs);
+        if (shooter.getComponents().size() == 0) {
+            canvas.showGameOver();
+        }
     }
 }
