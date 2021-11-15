@@ -5,9 +5,20 @@ import java.awt.Graphics2D;
 
 public class Bomb extends GameElement {
     public static final int SIZE = 5, UNIT_MOVE = 5;
+    private boolean breakable;
 
     public Bomb(int x, int y) {
         super(x, y, Color.green, true, SIZE, SIZE * 2);
+        this.breakable = true;
+    }
+
+    public Bomb(int x, int y, Color color) {
+        super(x, y, color, true, SIZE, SIZE * 2);
+        this.breakable = false;
+    }
+    
+    public boolean getBreakable() {
+        return breakable;
     }
 
     @Override

@@ -107,7 +107,8 @@ public class EnemyComposite extends GameElement {
         for (var row: rows) {
             for (var e: row) {
                 if (random.nextFloat() < 0.1F) {
-                    bombs.add(new Bomb(e.x, e.y));
+                    if (random.nextFloat() < 0.1F) bombs.add(new Bomb(e.x, e.y, Color.blue));
+                    else bombs.add(new Bomb(e.x, e.y));
                 }
             }
         }
@@ -138,18 +139,62 @@ public class EnemyComposite extends GameElement {
         shooter.getWeapons().removeAll(removeBullets);
 
         var removeBombs = new ArrayList<GameElement>();
-        removeBullets.clear();
 
         for (var b: bombs) {
             for (var bullet: shooter.getWeapons()) {
                 if (b.collideWith(bullet)) {
-                    removeBombs.add(b);
-                    removeBullets.add(bullet);
+                    Bomb bomb = (Bomb) b;
+                    if (bomb.getBreakable()) {
+                        removeBombs.add(b);
+                        shooter.getBonusBullets().add(new Bullet(bullet.x + 10, bullet.y));
+                        shooter.getBonusBullets().add(new Bullet(bullet.x - 10, bullet.y));
+                    } else {
+                        // removeBombs.add(b);
+                        removeBullets.add(bullet);
+                    }
                 }
             }
         }
-        shooter.getWeapons().removeAll(removeBullets);
         bombs.removeAll(removeBombs);
+        shooter.getWeapons().removeAll(removeBullets);
+        removeBombs.clear();
+        removeBullets.clear();
+
+        for (var b: bombs) {
+            for (var bullet: shooter.getBonusBullets()) {
+                if (b.collideWith(bullet)) {
+                    Bomb bomb = (Bomb) b;
+                    if (bomb.getBreakable()) {
+                        removeBombs.add(b);
+                        shooter.getBonusBullets().add(new Bullet(bullet.x + 10, bullet.y));
+                        shooter.getBonusBullets().add(new Bullet(bullet.x - 10, bullet.y));
+                    } else {
+                        // removeBombs.add(b);
+                        removeBullets.add(bullet);
+                    }
+                }
+            }
+        }
+        bombs.removeAll(removeBombs);
+        shooter.getBonusBullets().removeAll(removeBullets);
+
+        removeBombs.clear();
+        removeBullets.clear();
+        for (var row: rows) {
+            var removeEnemies = new ArrayList<GameElement>();
+            for (var enemy: row) {
+                for (var bonusBullet: shooter.getBonusBullets()) {
+                    if (enemy.collideWith(bonusBullet)) {
+                        removeBullets.add(bonusBullet);
+                        removeEnemies.add(enemy);
+                        int score = canvas.getScore();
+                        canvas.setScore(score + 10);
+                    }
+                }
+            }
+            row.removeAll(removeEnemies);
+        }
+        shooter.getBonusBullets().removeAll(removeBullets);
 
         removeBombs.clear();
         var removeBody = new ArrayList<GameElement>();

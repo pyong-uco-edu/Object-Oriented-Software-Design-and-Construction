@@ -9,6 +9,7 @@ public class Shooter extends GameElement {
     public int score = 0;
     private ArrayList<GameElement> components = new ArrayList<>();
     private ArrayList<GameElement> weapons = new ArrayList<>();
+    private ArrayList<GameElement> bonusBullets = new ArrayList<>();
 
     public Shooter(int x, int y) {
         super(x, y, 0, 0);
@@ -58,14 +59,20 @@ public class Shooter extends GameElement {
         return components;
     }
 
+    public ArrayList<GameElement> getBonusBullets() {
+        return bonusBullets;
+    }
+
     @Override
     public void render(Graphics2D g2) {
         for (var c: components) c.render(g2);
         for (var w: weapons) w.render(g2);
+        for (var b: bonusBullets) b.render(g2);
     }
 
     @Override
     public void animate() {
         for (var w: weapons) w.animate();
+        for (var b: bonusBullets) b.animate();
     }
 }
