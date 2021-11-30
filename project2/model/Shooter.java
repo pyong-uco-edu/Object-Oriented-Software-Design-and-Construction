@@ -63,6 +63,10 @@ public class Shooter extends GameElement {
         return bonusBullets;
     }
 
+    public void setWeapons(ArrayList<GameElement> weapons) {
+        this.weapons = weapons;
+    }
+
     @Override
     public void render(Graphics2D g2) {
         for (var c: components) c.render(g2);
