@@ -31,6 +31,14 @@ public class EnemyComposite extends GameElement {
         this.canvas = canvas;
     }
 
+    public ArrayList<ArrayList<GameElement>> getRows() {
+        return rows;
+    }
+
+    public ArrayList<GameElement> getBombs() {
+        return bombs;
+    }
+
     @Override
     public void render(Graphics2D g2) {
         for (var r: rows) for (var e: r) e.render(g2);
