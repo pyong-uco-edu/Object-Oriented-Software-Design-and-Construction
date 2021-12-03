@@ -34,7 +34,6 @@ public class BombObserver implements BombObserverInterface {
                         shooter.getBonusBullets().add(new Bullet(bullet.x + 10, bullet.y));
                         shooter.getBonusBullets().add(new Bullet(bullet.x - 10, bullet.y));
                     } else {
-                        // removeBombs.add(b);
                         removeBullets.add(bullet);
                     }
                 }
@@ -54,7 +53,6 @@ public class BombObserver implements BombObserverInterface {
                         shooter.getBonusBullets().add(new Bullet(bullet.x + 10, bullet.y));
                         shooter.getBonusBullets().add(new Bullet(bullet.x - 10, bullet.y));
                     } else {
-                        // removeBombs.add(b);
                         removeBullets.add(bullet);
                     }
                 }

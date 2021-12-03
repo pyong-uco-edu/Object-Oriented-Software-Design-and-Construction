@@ -11,11 +11,9 @@ public class EnemyObserver implements EnemyObserverInterface {
     private GameBoard gameBoard;
     private ArrayList<ArrayList<GameElement>> rows;
     private Shooter shooter;
-    // private EnemyComposite enemyComposite;
-
+    
     public EnemyObserver(GameBoard gameBoard, EnemyComposite enemyComposite, Shooter shooter) {
         this.gameBoard = gameBoard;
-        // this.enemyComposite = enemyComposite;
         this.rows = enemyComposite.getRows();
         this.shooter = shooter;
     }
